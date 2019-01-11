@@ -2,7 +2,7 @@ const Fortnite = require("fortnite-api");
 const moment = require("moment");
 var Discord = require('discord.js');
 module.exports = {
-    name: 'fortnite',
+    name: 'fn',
     description: 'Lifetime solo stats',
     args: false,
     cooldown: 10,
@@ -37,26 +37,26 @@ module.exports = {
                 fortniteAPI.login().then(() => {
 
                     fortniteAPI.getStatsBR(username, 'pc').then(stats => {
-                        //console.log(data.stats.lifetime)
-                        let embed = new Discord.RichEmbed()
-                            .setTitle("**" + username + "**")
-                            .setColor("BLURPLE")
-                            .setDescription("Lifetime Stats")
-                            .setThumbnail(message.author.displayAvatarURL)
-                            .addField("Wins", stats.lifetimeStats.wins, true)
-                            .addField("Top 10s", stats.lifetimeStats.top10s, true)
-                            .addField("Top 25s", stats.lifetimeStats.top25s, true)
-                            .addField("Win/Lose", stats.lifetimeStats['win%'] + "%", true)
-                            .addField("Kills", stats.lifetimeStats.kills, true)
-                            .addField("K/D", stats.lifetimeStats['k/d'], true)
-                            .addField("Matches", stats.lifetimeStats.matches, true)
-                            .addField("Kills Per Match", stats.lifetimeStats.killsPerMatch, true)
-                            .addField("Score", stats.lifetimeStats.score, true)
-                            .addField("Last Updated", moment.unix(stats.lifetimeStats.lastModified).format('MMMM Do YYYY, h:mm:ss a'), true);
-                        return message.channel.send(embed);
+                        console.log(stats)
+                        // let embed = new Discord.RichEmbed()
+                        //     .setTitle("**" + username + "**")
+                        //     .setColor("BLURPLE")
+                        //     .setDescription("Lifetime Stats")
+                        //     .setThumbnail(message.author.displayAvatarURL)
+                        //     .addField("Wins", stats.lifetimeStats.wins, true)
+                        //     .addField("Top 10s", stats.lifetimeStats.top10s, true)
+                        //     .addField("Top 25s", stats.lifetimeStats.top25s, true)
+                        //     .addField("Win/Lose", stats.lifetimeStats['win%'] + "%", true)
+                        //     .addField("Kills", stats.lifetimeStats.kills, true)
+                        //     .addField("K/D", stats.lifetimeStats['k/d'], true)
+                        //     .addField("Matches", stats.lifetimeStats.matches, true)
+                        //     .addField("Kills Per Match", stats.lifetimeStats.killsPerMatch, true)
+                        //     .addField("Score", stats.lifetimeStats.score, true)
+                        //     .addField("Last Updated", moment.unix(stats.lifetimeStats.lastModified).format('MMMM Do YYYY, h:mm:ss a'), true);
+                        // return message.channel.send(embed);
                     }).catch(err => {
                         console.log(err);
-                        message.reply("Could not find user... Double check spelling").then(r => r.delete(5000));
+                        message.reply("Could not find user... Double check spelling " + err).then(r => r.delete(5000));
                     });
                 });
             }).catch(err => {
