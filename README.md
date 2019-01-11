@@ -4,15 +4,14 @@
 
 This is a bot that I created to to mess around with my friends in our Discord server. Robles-Bot can do anything from play music from a YouTube link in your chat channel, to calling a phone and talking with text to speech. I will be adding more commands once I have more free time, but feel free to branch and contribute your own as well!
 
-
 ## Installation
-
 
 ```
 git clone git@github.com:AScriver/robles-bot.git
 cd robles-bot
 npm install
 ```
+[How do I setup a bot account and invite it to my server?](https://discordpy.readthedocs.io/en/rewrite/discord.html)
 
 ## Contributing
 
@@ -32,3 +31,4 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
