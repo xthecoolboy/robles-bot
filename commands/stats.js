@@ -1,7 +1,7 @@
 const userController = require('../controllers/userController');
 
 module.exports = {
-  name: 'test',
+  name: 'stats',
   description: 'Get Your Stats',
   args: false,
   cooldown: 0,

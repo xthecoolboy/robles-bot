@@ -1,18 +1,13 @@
 require('dotenv').config();
 const fs = require('fs');
 const Discord = require('discord.js');
-const mysql = require('mysql');
-// const {
-// prefix,
-// token
-// } = require('./config.json');
+const db = require('./models');
+const userController = require('./controllers/userController');
 
 const prefix = '!';
 const token = process.env.DISCORD_TOKEN;
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-
 const commandFiles = fs
   .readdirSync('./commands')
   .filter(file => file.endsWith('.js'));
@@ -23,19 +18,9 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'discorddb'
-});
-
-con.connect(err => {
-  if (err) throw err;
-  console.log('Connected to database!');
-});
-
 client.on('message', message => {
+  userController.incrementPostCount(message.author.id);
+
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
@@ -101,6 +86,8 @@ client.on('message', message => {
 
 client.login(token);
 
-client.once('ready', () => {
-  console.log('Ready!');
+db.sequelize.sync().then(() => {
+  client.once('ready', () => {
+    console.log('Ready!');
+  });
 });
