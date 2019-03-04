@@ -20,7 +20,6 @@ module.exports = {
       };
 
     const server = servers[message.guild.id];
-    console.log(server.dispatcher);
     server.queue.push(args[0]);
 
     if (!message.guild.voiceConnection)

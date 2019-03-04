@@ -3,7 +3,7 @@ module.exports = {
   description: 'Picks random location to land',
   args: false,
   execute(message, args) {
-    var loc = [
+    const loc = [
       'Junk Junction',
       'Lazy Links',
       'Risky Reels',
@@ -38,7 +38,7 @@ module.exports = {
       'Castle',
       'Junk 2'
     ];
-    var random = loc[Math.floor(Math.random() * loc.length)];
+    const random = loc[Math.floor(Math.random() * loc.length)];
     message.channel.send('Land at: ' + random);
   }
 };

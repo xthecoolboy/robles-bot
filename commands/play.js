@@ -35,17 +35,20 @@ module.exports = {
     server.queue.push(args[0]);
     message.channel.send('Song added to queue!');
 
+    console.log(servers);
+
     if (!message.guild.voiceConnection)
-      message.member.voiceChannel.join().then(function(connection) {
+      message.member.voiceChannel.join().then(connection => {
         play(connection, message);
       });
 
     play = (connection, message) => {
-      server.dispatcher = connection.playStream(
-        YTDL(server.queue[0], {
-          filter: 'audioonly'
-        })
-      );
+      const stream = YTDL(server.queue[0], {
+        filter: 'audioonly'
+      });
+      const streamOptions = { volume: 2 };
+
+      server.dispatcher = connection.playStream(stream, streamOptions);
       server.queue.shift();
       server.dispatcher.on('end', function() {
         if (server.queue[0]) play(connection, message);

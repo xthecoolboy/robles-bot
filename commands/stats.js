@@ -7,19 +7,18 @@ module.exports = {
   cooldown: 0,
   usage: '<user>',
   execute(message, args) {
-    console.log(message.channel.lastMessage.member.nickname);
-
+    console.log(message);
     if (!message.mentions.users.size) {
-      userController.getStats(message.author.id, stats => {
-        return message.channel.send(`<@${stats.user}>`, {
+      return userController.getStats(message.author.id, stats => {
+        message.channel.send(`<@${stats.user}>`, {
           embed: {
             color: 3447003,
             author: {
-              name: message.channel.lastMessage.member.nickname,
+              name: message.author.username,
               icon_url: `${message.author.displayAvatarURL}`
             },
-            title: `Server Stats For: ${
-              message.channel.lastMessage.member.nickname
+            title: `Server Stats For: @${message.author.username}#${
+              message.author.discriminator
             }`,
             fields: [
               {
@@ -43,5 +42,39 @@ module.exports = {
         });
       });
     }
+
+    message.mentions.users.map(user => {
+      return userController.getStats(user.id, stats => {
+        console.log(user);
+        message.channel.send(`<@!${stats.user}>`, {
+          embed: {
+            color: 3447003,
+            author: {
+              name: user.username,
+              icon_url: `${user.displayAvatarURL}`
+            },
+            title: `Server Stats For: @${user.username}#${user.discriminator}`,
+            fields: [
+              {
+                name: 'Discord ID:',
+                value: `${stats.user}`
+              },
+              {
+                name: 'Post Count: ',
+                value: `${stats.postCount}`
+              },
+              {
+                name: 'Joined: ',
+                value: `${stats.createdAt}`
+              },
+              {
+                name: 'Last Message: ',
+                value: `${stats.updatedAt}`
+              }
+            ]
+          }
+        });
+      });
+    });
   }
 };
