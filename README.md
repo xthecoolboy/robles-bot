@@ -14,6 +14,8 @@ npm install
 
 [How do I setup a bot account and invite it to my server?](https://discordpy.readthedocs.io/en/rewrite/discord.html)
 
+## Help
+
 If you need help with anything, feel free to [join my Discord](https://discord.gg/Bm7mnzh) server and ask questions
 
 ## Contributing
