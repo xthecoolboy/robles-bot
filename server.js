@@ -28,11 +28,11 @@ db.sequelize.sync().then(() => {
 
 // This code block runs when a message is sent in the server
 client.on('message', message => {
-  // if message does not start with the prefix, or if it is from a bot, return
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
-
   // sends the author id to the user controller to increment in the db.
   userController.incrementPostCount(message.author.id);
+
+  // if message does not start with the prefix, or if it is from a bot, return
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   // takes everything after the prefix and command
   const args = message.content.slice(prefix.length).split(/ +/);
