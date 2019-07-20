@@ -10,7 +10,7 @@ module.exports = {
     console.log(message);
     if (!message.mentions.users.size) {
       return userController.getStats(message.author.id, stats => {
-        message.channel.send(`<@${stats.user}>`, {
+        message.channel.send(`<@${stats.userId}>`, {
           embed: {
             color: 3447003,
             author: {
@@ -19,11 +19,11 @@ module.exports = {
             },
             title: `Server Stats For: @${message.author.username}#${
               message.author.discriminator
-            }`,
+              }`,
             fields: [
               {
                 name: 'Discord ID:',
-                value: `${stats.user}`
+                value: `${stats.userId}`
               },
               {
                 name: 'Post Count: ',
@@ -46,7 +46,7 @@ module.exports = {
     message.mentions.users.map(user => {
       return userController.getStats(user.id, stats => {
         console.log(user);
-        message.channel.send(`<@!${stats.user}>`, {
+        message.channel.send(`<@!${stats.userId}>`, {
           embed: {
             color: 3447003,
             author: {
@@ -57,7 +57,7 @@ module.exports = {
             fields: [
               {
                 name: 'Discord ID:',
-                value: `${stats.user}`
+                value: `${stats.userId}`
               },
               {
                 name: 'Post Count: ',

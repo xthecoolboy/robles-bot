@@ -3,6 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     user: {
       type: DataTypes.STRING
     },
+    userId: {
+      type: DataTypes.STRING
+    },
     postCount: {
       type: DataTypes.INTEGER,
       defaultValue: 0

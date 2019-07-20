@@ -3,6 +3,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const db = require('./models');
 const userController = require('./controllers/userController');
+const postController = require('./controllers/postController');
 
 const prefix = '!';
 const token = process.env.DISCORD_TOKEN;
@@ -28,11 +29,17 @@ db.sequelize.sync().then(() => {
 
 // This code block runs when a message is sent in the server
 client.on('message', message => {
-  // sends the author id to the user controller to increment in the db.
-  userController.incrementPostCount(message.author.id);
 
-  // if message does not start with the prefix, or if it is from a bot, return
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  // if message is from a bot, return 
+  if (message.author.bot) return;
+
+  // sends the author id to the user controller to increment in the db.
+  // sends post to db to be saved.
+  userController.incrementPostCount(message.author.username, message.author.id);
+  postController.savePost(message.author.id, message.content)
+
+  // if message does not start with the prefix, return
+  if (!message.content.startsWith(prefix)) return;
 
   // takes everything after the prefix and command
   const args = message.content.slice(prefix.length).split(/ +/);
@@ -62,7 +69,7 @@ client.on('message', message => {
     if (command.usage) {
       reply += `\nThe proper usage would be: \`${prefix}${command.name} ${
         command.usage
-      }\``;
+        }\``;
     }
 
     return message.channel.send(reply);

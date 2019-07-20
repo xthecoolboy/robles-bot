@@ -1,11 +1,12 @@
 const db = require('../models');
 
 module.exports = {
-  incrementPostCount: user => {
+  incrementPostCount: (user, id) => {
     // searched the database for the user. If none exists, create it.
     db.User.findOrCreate({
       where: {
-        user: user
+        user: user,
+        userId: id
       },
       defaults: {
         postCount: 0
@@ -15,7 +16,8 @@ module.exports = {
         // increments post count
         db.User.increment('postCount', {
           where: {
-            user: user
+            user: user,
+            userId: id
           }
         });
       })
@@ -24,10 +26,10 @@ module.exports = {
       });
   },
   // finds user by their discord ID in the database
-  getStats: (user, cb) => {
-    db.User.findOne({
+  getStats: (id, cb) => {
+    db.User.find({
       where: {
-        user: user
+        userId: id
       }
     })
       .then(dbUser => {
