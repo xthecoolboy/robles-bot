@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require("../models");
 
 module.exports = {
   incrementPostCount: (user, id) => {
@@ -14,7 +14,7 @@ module.exports = {
     })
       .then(dbUser => {
         // increments post count
-        db.User.increment('postCount', {
+        db.User.increment("postCount", {
           where: {
             user: user,
             userId: id
@@ -27,7 +27,7 @@ module.exports = {
   },
   // finds user by their discord ID in the database
   getStats: (id, cb) => {
-    db.User.find({
+    db.User.findOne({
       where: {
         userId: id
       }
